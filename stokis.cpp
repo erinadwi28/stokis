@@ -1,14 +1,14 @@
-//STOKIS
-
 #include<iostream>
 #include<conio.h>
 #include<windows.h>
 #include<cstdlib>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
 struct item {
-	string nama_brg[50];
+	char nama_brg[50][50];
 	char kode_brg[20];
 	int stok[20];
 }itm;
@@ -16,7 +16,7 @@ struct item {
 int z;
 	
 void tambah(){
-	cout<<"\nMasukkan kode barang\t: ";
+	  cout<<"\nMasukkan kode barang\t: ";
     cin>>itm.kode_brg[z];
     cout<<"Masukkan nama barang\t: ";
     cin>>itm.nama_brg[z];
@@ -104,13 +104,55 @@ cout<<"\nMasukkan kode barang\t: ";
 
        for(i=0;i<z;i++)
       {
-		cout<<"\nMasukkan kode barang\t: "<<itm.kode_brg[i];
-    	cout<<"\nMasukkan nama barang\t: "<<itm.nama_brg[i];
-    	cout<<"\nMasukkan stok barang\t: "<<itm.stok[i]<<endl<<endl;
+		  cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
         j++;
        }
         getch();
       }
+
+  void cari(){
+    int a, i, j,count;
+    string cari;
+    cout<<"Masukkan nama barang yang dicari: ";
+    cin>>cari;
+
+     //count+=z;
+    for(i=0;i<z;i++)
+      if(itm.nama_brg[i] == cari){
+		 cout<<"Data ditemukan"<<z;	 
+      }
+    getch();
+  }
+
+  void urut(){
+  	int jml, pilih, x, y, a, m, n;
+	char temp[40];
+		
+		cout<<"Sebelum Urut: "; tampil();
+			if (z>1){
+				for (y=1; y<=(z-1); y++){
+					a=(strcmp(itm.nama_brg[z], itm.nama_brg[y]));
+					if (a<=0){
+						strcpy (temp, itm.nama_brg[z]);
+						for (n=(z-1); n>=y; n--){
+							m=(n+1);
+							strcpy (itm.nama_brg[m], itm.nama_brg[n]);
+						}
+						strcpy(itm.nama_brg[y], temp);
+					}
+				}
+			}
+		cout<<"\nSetelah diurutkan dengan Metode Ascending: "<<endl;
+		for (x=0; x<z; x++){
+			cout<<x<<". "<<itm.nama_brg[x];
+			cout<<endl;
+		}
+		cout<<endl;
+		
+		getch();
+ }
       
 int main ()
 
@@ -149,13 +191,13 @@ int main ()
         }
         case 4:
         {
-          cout<<"cari";
+          cari();
           break;
         }
 
            case 5:
         {
-          cout<<"urutkan";
+          urut();
           break;
         }
          case 6:
