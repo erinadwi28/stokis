@@ -4,6 +4,8 @@
 #include<conio.h>
 #include<windows.h>
 #include<cstdlib>
+#include<stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -112,6 +114,33 @@ cout<<"\nMasukkan kode barang\t: ";
         getch();
       }
       
+void urut(){
+
+	int y, x, a, n, m;
+	string temp[40];
+		if (z>1){
+				for (y=1; y<=(z-1); y++){
+					a=(strcmp(itm.nama_brg[z], itm.nama_brg[y]));
+					if (a<=0){
+						strcpy (temp, itm.nama_brg[x]);
+						for (n=(z-1); n>=y; n--){
+							m=(n+1);
+							strcpy (itm.nama_brg[m], itm.nama_brg[n]);
+						}
+						strcpy(itm.nama_brg[y], temp);
+					}
+				}
+			}
+		}
+		cout<<"\nSetelah diurutkan dengan Metode Ascending: "<<endl;
+		for (z=1; z<=jml; z++){
+			cout<<x<<". "<<itm.nama_brg[z];
+			cout<<endl;
+		}
+		cout<<endl;
+		
+		getch();
+}
 int main ()
 
    {
@@ -125,7 +154,7 @@ int main ()
       cout<<"\n2: Tampil data barang";
       cout<<"\n3: Ambil barang";
       cout<<"\n4: Cari data barang";
-      cout<<"\n5: Urutkan data barang sesuai abjad";
+      cout<<"\n5: Urutkan data barang";
       cout<<"\n6: Keluar"<<endl;
       cout<<"\n\n Pilih nomor\t: ";
       cin>>i;
@@ -155,7 +184,7 @@ int main ()
 
            case 5:
         {
-          cout<<"urutkan";
+          urut();
           break;
         }
          case 6:
