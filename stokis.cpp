@@ -275,7 +275,7 @@ void urut(){
 				}
 			}
 		}
-		cout<<"No."<<"\tNama"<<endl;
+		cout<<"No."<<"\tNama Barang"<<endl;
 		for(i=0; i<z; i++)
 		{
 			cout <<i+1<<".| "<< itm.nama_brg[i]<<endl;
@@ -291,14 +291,18 @@ int main (){
 
     while(1)
     {
-      cout<<"\nSelamat Datang di Stokis"<<endl;
-      cout<<"\n1: Tambah data barang";
+      cout<<"=======================================";
+	  cout<<"\n\tSELAMAT DATANG DI STOKIS"<<endl;
+	  cout<<"\tProgram Inventory Kantor";
+	  cout<<"\n=======================================";
+      cout<<"\n\n1: Tambah data barang";
       cout<<"\n2: Tampil data barang";
       cout<<"\n3: Ambil barang";
       cout<<"\n4: Cari data barang";
       cout<<"\n5: Urutkan data barang";
       cout<<"\n6: Kosongkan";
-      cout<<"\n7: Keluar"<<endl;
+      cout<<"\n7: Keluar";
+      cout<<"\n---------------------------------------";
       cout<<"\n\n Pilih nomor\t: ";
       cin>>i;
 
