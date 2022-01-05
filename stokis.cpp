@@ -3,16 +3,36 @@
 #include<stdio.h>
 #include<windows.h>
 #include<cstdlib>
-#include <stdio.h>
 #include <string.h>
+#define max 3
+
 
 using namespace std;
 
 struct item {
-	char nama_brg[50][50];
-	string kode_brg[20];
-	int stok[20];
+	int atas;
+	char nama_brg[max][50];
+	string kode_brg[max];
+	int stok[max];
 }itm;
+
+void awal(){
+	itm.atas=-1;
+}
+
+int kosong(){
+	if(itm.atas==-1)
+		return 1;
+	else
+		return 0;
+}
+
+int penuh(){
+	if(itm.atas==max-1)
+		return 1;
+	else
+		return 0;
+}
 
 int z;
 
@@ -30,6 +50,8 @@ void tambah(){
 	
 	switch(pilih){
 	case 1:
+	if(kosong()==1){
+		itm.atas++;
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>itm.kode_brg[z];
     	cout<<"Masukkan nama barang\t: ";
@@ -37,6 +59,19 @@ void tambah(){
     	cout<<"Masukkan stok barang\t: ";
     	cin>>itm.stok[z];
     	z++;
+	} else if(penuh()==0){
+		itm.atas++;
+		cout<<"\nMasukkan kode barang\t: ";
+    	cin>>itm.kode_brg[z];
+    	cout<<"Masukkan nama barang\t: ";
+    	fflush(stdin);gets(itm.nama_brg[z]);
+    	cout<<"Masukkan stok barang\t: ";
+    	cin>>itm.stok[z];
+    	z++;
+	}else{
+		cout<<"Penyimpanan penuh"<<endl;
+		getch();
+	}
     	break;
 	
 	case 2:
@@ -71,6 +106,7 @@ void tambah(){
 	}
 }
 
+
 void ambil(){
 	char a;
 	string i;
@@ -79,7 +115,8 @@ void ambil(){
 	int total_stok=0;
 	system("cls");
 	
-	cout<<"\nMasukkan kode barang\t: ";
+	if(kosong()==0){
+cout<<"\nMasukkan kode barang\t: ";
     cin>>i;
     for(j=0;j<z;j++)
     {
@@ -145,7 +182,16 @@ void ambil(){
         	}
       	}
     }
+}else{
+		cout<<"Penyimpanan kosong"<<endl;
+}
+	
     getch();
+}
+
+void kosongkan(){
+	itm.atas=-1;
+	cout<<"Penyimpanan kosong"<<endl;
 }
 
 void tampil()
@@ -163,7 +209,7 @@ void tampil()
         getch();
       }
 
-  void cari(){
+void cari(){
     int a, i, j,count;
     string cari,data;
     cout<<"\nMasukkan nama barang yang dicari: ";
@@ -172,7 +218,6 @@ void tampil()
     for(i=0;i<z;i++){
 		if(itm.nama_brg[i] == cari){
 		 count=1;
-		 data=i;
 		 break;
       }
 	}
@@ -188,28 +233,58 @@ void tampil()
     getch();
   }
 
-  void urut(){
-  	int i,x;
+void urut(){
+  	int i,j;
+	char temp[20];
 		
-		cout<<"Sebelum Urut: "; tampil();
-		// cout<<"\nData diurutkan secara Descending";
-		// 			for (i=1; i<z; i++) { 
-		// 				for (x=1; x<z; x++){ 
-		// 					if (itm.nama_brg[x-1]<itm.nama_brg[x]){
-		// 					string temp = itm.nama_brg[x-1];
-		// 					itm.nama_brg[x-1]=itm.nama_brg[x];
-		// 					itm.nama_brg[x]=temp;
-		// 				}
-		// 			}
-		// 			cout<<endl;
-		// 			for (i=0; i<z ; i++){
-		// 				cout<<i+1<<"."<<itm.nama_brg[i]<<endl;
-		// 					}
-		// 			}
+		tampil();
 		
+		 cout<<"Nama barang sebelum urut\t: "<<endl;
+		 for (i=0;i<z;i++){
+		 	cout<<i+1<<"."<<itm.nama_brg[i]<<endl;
+		 }
+		cout<<"\nNama barang diurutkan secara Ascending"<<endl;
+		for(i=1; i<z; i++)
+		{
+			for(j=1; j<z; j++)
+			{
+				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])>0)
+				{
+					strcpy(temp, itm.nama_brg[j-1]);
+					strcpy(itm.nama_brg[j-1], itm.nama_brg[j]);
+					strcpy(itm.nama_brg[j], temp);
+				}
+			}
+		}
+		cout<<"No."<<"\tNama"<<endl;
+		for(i=0; i<z; i++)
+		{
+			cout<<i+1<<".| "<< itm.nama_brg[i] <<endl;
+		}
+		
+		cout<<"\nNama barang diurutkan secara Descending"<<endl;
+		for(i=1; i<z; i++)
+		{
+			for(j=1; j<z; j++)
+			{
+				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])<0)
+				{
+					strcpy(temp, itm.nama_brg[j-1]);
+					strcpy(itm.nama_brg[j-1], itm.nama_brg[j]);
+					strcpy(itm.nama_brg[j], temp);
+				}
+			}
+		}
+		cout<<"No."<<"\tNama"<<endl;
+		for(i=0; i<z; i++)
+		{
+			cout <<i+1<<".| "<< itm.nama_brg[i]<<endl;
+		}	
 		getch();
  }
-      
+ 
+   
+   
 int main (){
     int i;
     system("cls");
@@ -221,8 +296,9 @@ int main (){
       cout<<"\n2: Tampil data barang";
       cout<<"\n3: Ambil barang";
       cout<<"\n4: Cari data barang";
-      cout<<"\n5: Urutkan data barang sesuai abjad";
-      cout<<"\n6: Keluar"<<endl;
+      cout<<"\n5: Urutkan data barang";
+      cout<<"\n6: Kosongkan";
+      cout<<"\n7: Keluar"<<endl;
       cout<<"\n\n Pilih nomor\t: ";
       cin>>i;
 
@@ -254,13 +330,18 @@ int main (){
           urut();
           break;
         }
-         case 6:
+		   case 6:
+        {
+          kosongkan();
+          break;
+        }
+         case 7:
         {
       	exit(0);
           break;
         }
       }
-      if (i==6)
+      if (i==7)
         break;
       	system("cls");
     }
