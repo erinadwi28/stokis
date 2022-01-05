@@ -9,7 +9,7 @@
 using namespace std;
 
 struct item {
-	char nama_brg[50][50];;
+	char nama_brg[50][50];
 	string kode_brg[20];
 	int stok[20];
 }itm;
@@ -33,7 +33,7 @@ void tambah(){
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>itm.kode_brg[z];
     	cout<<"Masukkan nama barang\t: ";
-    	cin>>itm.nama_brg[z];
+    	fflush(stdin);gets(itm.nama_brg[z]);
     	cout<<"Masukkan stok barang\t: ";
     	cin>>itm.stok[z];
     	z++;
@@ -155,7 +155,7 @@ void tampil()
 
        for(i=0;i<z;i++)
       {
-		  cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
     	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
     	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
         j++;
@@ -165,42 +165,47 @@ void tampil()
 
   void cari(){
     int a, i, j,count;
-    string cari;
-    cout<<"Masukkan nama barang yang dicari: ";
-    cin>>cari;
+    string cari,data;
+    cout<<"\nMasukkan nama barang yang dicari: ";
+    fflush(stdin);getline(cin,cari);
 
-     //count+=z;
-    for(i=0;i<z;i++)
-      if(itm.nama_brg[i] == cari){
-		 cout<<"Data ditemukan"<<z;	 
+    for(i=0;i<z;i++){
+		if(itm.nama_brg[i] == cari){
+		 count=1;
+		 data=i;
+		 break;
       }
+	}
+	if (count==1){
+		cout<<"Data ditemukan";
+		cout<<"\nRincian Barang";
+		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
+	}else{
+		cout<<"Data tidak ditemukan"<<endl;
+	}
     getch();
   }
 
   void urut(){
-  	int jml, pilih, x, y, a, m, n;
-	char temp[40];
+  	int i,x;
 		
 		cout<<"Sebelum Urut: "; tampil();
-			if (z>1){
-				for (y=1; y<=(z-1); y++){
-					a=(strcmp(itm.nama_brg[z], itm.nama_brg[y]));
-					if (a<=0){
-						strcpy (temp, itm.nama_brg[z]);
-						for (n=(z-1); n>=y; n--){
-							m=(n+1);
-							strcpy (itm.nama_brg[m], itm.nama_brg[n]);
-						}
-						strcpy(itm.nama_brg[y], temp);
-					}
-				}
-			}
-		cout<<"\nSetelah diurutkan dengan Metode Ascending: "<<endl;
-		for (x=0; x<z; x++){
-			cout<<x<<". "<<itm.nama_brg[x];
-			cout<<endl;
-		}
-		cout<<endl;
+		// cout<<"\nData diurutkan secara Descending";
+		// 			for (i=1; i<z; i++) { 
+		// 				for (x=1; x<z; x++){ 
+		// 					if (itm.nama_brg[x-1]<itm.nama_brg[x]){
+		// 					string temp = itm.nama_brg[x-1];
+		// 					itm.nama_brg[x-1]=itm.nama_brg[x];
+		// 					itm.nama_brg[x]=temp;
+		// 				}
+		// 			}
+		// 			cout<<endl;
+		// 			for (i=0; i<z ; i++){
+		// 				cout<<i+1<<"."<<itm.nama_brg[i]<<endl;
+		// 					}
+		// 			}
 		
 		getch();
  }
