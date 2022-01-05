@@ -161,37 +161,8 @@ void tampil()
        }
         getch();
       }
-      
-void urut(){
 
-	int y, x, a, n, m;
-	string temp[40];
-		if (z>1){
-				for (y=1; y<=(z-1); y++){
-					a=(strcmp(itm.nama_brg[z], itm.nama_brg[y]));
-					if (a<=0){
-						strcpy (temp, itm.nama_brg[x]);
-						for (n=(z-1); n>=y; n--){
-							m=(n+1);
-							strcpy (itm.nama_brg[m], itm.nama_brg[n]);
-						}
-						strcpy(itm.nama_brg[y], temp);
-					}
-				}
-			}
-		}
-		cout<<"\nSetelah diurutkan dengan Metode Ascending: "<<endl;
-		for (z=1; z<=jml; z++){
-			cout<<x<<"z"<<itm.nama_brg[z];
-			cout<<endl;
-		}
-		cout<<endl;
-		
-		getch();
-}
-int main ()
-
-  void cari(){
+void cari(){
     int a, i, j,count;
     string cari;
     cout<<"Masukkan nama barang yang dicari: ";
@@ -200,39 +171,67 @@ int main ()
      //count+=z;
     for(i=0;i<z;i++)
       if(itm.nama_brg[i] == cari){
-		 cout<<"Data ditemukan"<<z;	 
+		 cout<<"Data ditemukan"<<endl;
+		 cout<<"\nDetail barang:";
+		 cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+       	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
       }
     getch();
   }
 
-  void urut(){
-  	int jml, pilih, x, y, a, m, n;
-	char temp[40];
+void urut(){
+  	int i,j;
+	char temp[20];
 		
-		cout<<"Sebelum Urut: "; tampil();
-			if (z>1){
-				for (y=1; y<=(z-1); y++){
-					a=(strcmp(itm.nama_brg[z], itm.nama_brg[y]));
-					if (a<=0){
-						strcpy (temp, itm.nama_brg[z]);
-						for (n=(z-1); n>=y; n--){
-							m=(n+1);
-							strcpy (itm.nama_brg[m], itm.nama_brg[n]);
-						}
-						strcpy(itm.nama_brg[y], temp);
-					}
+		cout<<"Sebelum Urut: "; 
+		tampil();
+		
+		 cout<<"Data sblm urut:"<<z<<endl;
+		 for (i=0;i<z;i++){
+		 	cout<<i+1<<"."<<itm.nama_brg[i]<<endl;
+		 }
+		cout<<"\nData diurutkan secara Ascending"<<endl;
+		for(i=1; i<z; i++)
+		{
+			for(j=1; j<z; j++)
+			{
+				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])>0)
+				{
+					strcpy(temp, itm.nama_brg[j-1]);
+					strcpy(itm.nama_brg[j-1], itm.nama_brg[j]);
+					strcpy(itm.nama_brg[j], temp);
 				}
 			}
-		cout<<"\nSetelah diurutkan dengan Metode Ascending: "<<endl;
-		for (x=0; x<z; x++){
-			cout<<x<<". "<<itm.nama_brg[x];
-			cout<<endl;
 		}
-		cout<<endl;
+		cout<<"No."<<"\tNama"<<"\t\tStok"<<"\t\tKode"<<endl;
+		for(i=0; i<z; i++)
+		{
+			cout<<i+1<<".| "<< itm.nama_brg[i] <<"\t|\t"<<itm.stok[i]<<"\t|\t"<<itm.kode_brg[i]<<endl;
+		}
 		
+		cout<<"\nData diurutkan secara Descending"<<endl;
+		for(i=1; i<z; i++)
+		{
+			for(j=1; j<z; j++)
+			{
+				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])<0)
+				{
+					strcpy(temp, itm.nama_brg[j-1]);
+					strcpy(itm.nama_brg[j-1], itm.nama_brg[j]);
+					strcpy(itm.nama_brg[j], temp);
+				}
+			}
+		}
+		cout<<"No."<<"\tNama"<<"\t\tStok"<<"\t\tKode"<<endl;
+		for(i=0; i<z; i++)
+		{
+			cout <<i+1<<".| "<< itm.nama_brg[i]<<"\t|\t"<<itm.stok[i]<<"\t|\t"<<itm.kode_brg[i]<<endl;
+		}	
 		getch();
  }
-      
+   
+   
 int main (){
     int i;
     system("cls");
