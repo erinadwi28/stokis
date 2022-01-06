@@ -1,3 +1,9 @@
+//Anggota:
+// RAHMA MAULANI 21.22.2450
+// RATIH SINTA ANGGRAINI 21.22.2458
+// SHINTA ASMA'IN 21.22.2463
+// ERINA DWI UTAMI 21.22.2468
+
 #include<iostream>
 #include<conio.h>
 #include<stdio.h>
@@ -43,6 +49,7 @@ void tambah(){
 	string kode;
 	int total_stok=0;
 	
+	cout<<"Pilih Menu\t:"<<endl;
 	cout<<"1. Tambah barang baru";
 	cout<<"\n2. Isi stok barang lama";
 	cout<<"\n\nPilih nomor\t: ";
@@ -52,6 +59,7 @@ void tambah(){
 	case 1:
 	if(kosong()==1){
 		itm.atas++;
+		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>itm.kode_brg[z];
     	cout<<"Masukkan nama barang\t: ";
@@ -61,6 +69,7 @@ void tambah(){
     	z++;
 	} else if(penuh()==0){
 		itm.atas++;
+		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>itm.kode_brg[z];
     	cout<<"Masukkan nama barang\t: ";
@@ -69,7 +78,7 @@ void tambah(){
     	cin>>itm.stok[z];
     	z++;
 	}else{
-		cout<<"Penyimpanan penuh"<<endl;
+		cout<<"\nPenyimpanan penuh !!!"<<endl;
 		getch();
 	}
     	break;
