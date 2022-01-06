@@ -155,9 +155,9 @@ void tampil()
 
     for(i=0;i<z;i++)
     {
-		cout<<"\nMasukkan kode barang\t: "<<itm.kode_brg[i];
-    	cout<<"\nMasukkan nama barang\t: "<<itm.nama_brg[i];
-    	cout<<"\nMasukkan stok barang\t: "<<itm.stok[i]<<endl<<endl;
+		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
         j++;
     }
     getch();
