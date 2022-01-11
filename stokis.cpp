@@ -34,8 +34,7 @@ int kosong(){
 }
 
 int penuh(){
-	//if(itm.atas==max-1)
-	if(itm.atas==max)
+	if(itm.atas==max-1)
 		return 1;
 	else
 		return 0;
@@ -62,37 +61,35 @@ void tambah(){
 		itm.atas++;
 		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
-    	cin>>itm.kode_brg[z];
+    	cin>>itm.kode_brg[itm.atas];
     	cout<<"Masukkan nama barang\t: ";
-    	fflush(stdin);gets(itm.nama_brg[z]);
+    	fflush(stdin);gets(itm.nama_brg[itm.atas]);
     	cout<<"Masukkan stok barang\t: ";
-    	cin>>itm.stok[z];
-    	z++;
+    	cin>>itm.stok[itm.atas];
 	} else if(penuh()==0){
 		itm.atas++;
 		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
-    	cin>>itm.kode_brg[z];
+    	cin>>itm.kode_brg[itm.atas];
     	cout<<"Masukkan nama barang\t: ";
-    	fflush(stdin);gets(itm.nama_brg[z]);
+    	fflush(stdin);gets(itm.nama_brg[itm.atas]);
     	cout<<"Masukkan stok barang\t: ";
-    	cin>>itm.stok[z];
-    	z++;
+    	cin>>itm.stok[itm.atas];
 	}else{
 		cout<<"\nPenyimpanan penuh !!!"<<endl;
 		getch();
 	}
-    	break;
+    break;
 	
 	case 2:
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>kode;
     	
-    	for(int j=0;j<z;j++)
+    	for(int j=0;j<=itm.atas;j++)
     	{
     		if (itm.kode_brg[j]==kode)
       		{
-        		cout<<"\nNama barang\t\t: "<<itm.nama_brg[j];
+      			cout<<"\nNama barang\t\t: "<<itm.nama_brg[j];
         		cout<<"\nStok barang saat ini\t: "<<itm.stok[j];
         		cout<<"\n\nJumlah barang yang ingin ditambahkan\t:";
         		cin>>jml_tambah;
@@ -100,12 +97,14 @@ void tambah(){
         		itm.stok[j] = total_stok + jml_tambah;
         		cout<<"\nPenambahan stok berhasil";
         		getch();
+        		break;
       		} 
 			else 
 			{
 				cout<<"Kode yang Anda masukkan salah";
 				getch();
 			}
+			
     	}
     	break;
     	
@@ -125,9 +124,9 @@ void ambil(){
 	system("cls");
 	
 	if(kosong()==0){
-cout<<"\nMasukkan kode barang\t: ";
+	cout<<"\nMasukkan kode barang\t: ";
     cin>>i;
-    for(j=0;j<z;j++)
+    for(j=itm.atas;j>=0;j--)
     {
     	if (itm.kode_brg[j]==i)
       	{
@@ -200,23 +199,27 @@ cout<<"\nMasukkan kode barang\t: ";
 
 void kosongkan(){
 	itm.atas=-1;
-	cout<<"Penyimpanan kosong"<<endl;
+	cout<<"\nPenyimpanan telah dikosongkan"<<endl;
+	getch();
 }
 
 void tampil()
 {
-    int i, j=1;
-    system("cls");
+	if(kosong()==0){
+		int i, j=1;
+    	system("cls");
 
-       for(i=0;i<z;i++)
-      {
-		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
-    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
-    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
-        j++;
-       }
-        getch();
-      }
+    	for(i=itm.atas;i>=0;i--)
+    	{
+			cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    		cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    		cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
+    	}
+	} else {
+		cout<<"\nPenyimpanan kosong"<<endl;
+	}
+    getch();
+}
 
 void cari(){
     int a, i, j,count;
@@ -243,8 +246,9 @@ void cari(){
   }
 
 void urut(){
-  	int i,j;
-	char temp[20];
+	if(kosong()==0){
+		int i,j;
+		char temp[20];
 		
 		tampil();
 		
@@ -289,7 +293,10 @@ void urut(){
 		{
 			cout <<i+1<<".| "<< itm.nama_brg[i]<<endl;
 		}	
-		getch();
+	} else {
+		cout<<"\nPenyimpanan kosong"<<endl;
+	}
+  	getch();
  }
  
    
@@ -297,6 +304,7 @@ void urut(){
 int main (){
     int i;
     system("cls");
+    awal();
 
     while(1)
     {
