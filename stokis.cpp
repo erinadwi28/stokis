@@ -1,3 +1,4 @@
+// Kelompok 13
 //Anggota:
 // RAHMA MAULANI 21.22.2450
 // RATIH SINTA ANGGRAINI 21.22.2458
@@ -34,7 +35,7 @@ int kosong(){
 }
 
 int penuh(){
-	if(itm.atas==max-1)
+	if(itm.atas==max)
 		return 1;
 	else
 		return 0;
@@ -42,7 +43,7 @@ int penuh(){
 
 int z;
 
-//sampai di fitur tambah ini
+// TAMBAH
 void tambah(){
 	system("cls");
 	int pilih, jml_tambah;
@@ -115,7 +116,23 @@ void tambah(){
 	}
 }
 
+// TAMPIL
+void tampil()
+{
+    int i, j=1;
+    system("cls");
 
+       for(i=0;i<z;i++)
+      {
+		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
+        j++;
+       }
+        getch();
+      }
+
+// AMBIL
 void ambil(){
 	char a;
 	string i;
@@ -198,29 +215,10 @@ cout<<"\nMasukkan kode barang\t: ";
     getch();
 }
 
-void kosongkan(){
-	itm.atas=-1;
-	cout<<"Penyimpanan kosong"<<endl;
-}
-
-void tampil()
-{
-    int i, j=1;
-    system("cls");
-
-       for(i=0;i<z;i++)
-      {
-		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
-    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
-    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
-        j++;
-       }
-        getch();
-      }
-
+// CARI
 void cari(){
-    int a, i, j,count;
-    string cari,data;
+    int a, i, count;
+    string cari;
     cout<<"\nMasukkan nama barang yang dicari: ";
     fflush(stdin);getline(cin,cari);
 
@@ -242,6 +240,7 @@ void cari(){
     getch();
   }
 
+// URUTKAN
 void urut(){
   	int i,j;
 	char temp[20];
@@ -309,8 +308,7 @@ int main (){
       cout<<"\n3: Ambil barang";
       cout<<"\n4: Cari data barang";
       cout<<"\n5: Urutkan data barang";
-      cout<<"\n6: Kosongkan";
-      cout<<"\n7: Keluar";
+      cout<<"\n6: Keluar";
       cout<<"\n---------------------------------------";
       cout<<"\n\n Pilih nomor\t: ";
       cin>>i;
@@ -345,16 +343,11 @@ int main (){
         }
 		   case 6:
         {
-          kosongkan();
-          break;
-        }
-         case 7:
-        {
       	exit(0);
           break;
         }
       }
-      if (i==7)
+      if (i==6)
         break;
       	system("cls");
     }
