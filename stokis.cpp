@@ -1,4 +1,3 @@
-// Kelompok 13
 //Anggota:
 // RAHMA MAULANI 21.22.2450
 // RATIH SINTA ANGGRAINI 21.22.2458
@@ -35,7 +34,7 @@ int kosong(){
 }
 
 int penuh(){
-	if(itm.atas==max)
+	if(itm.atas==max-1)
 		return 1;
 	else
 		return 0;
@@ -43,7 +42,7 @@ int penuh(){
 
 int z;
 
-// TAMBAH
+//sampai di fitur tambah ini
 void tambah(){
 	system("cls");
 	int pilih, jml_tambah;
@@ -62,37 +61,35 @@ void tambah(){
 		itm.atas++;
 		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
-    	cin>>itm.kode_brg[z];
+    	cin>>itm.kode_brg[itm.atas];
     	cout<<"Masukkan nama barang\t: ";
-    	fflush(stdin);gets(itm.nama_brg[z]);
+    	fflush(stdin);gets(itm.nama_brg[itm.atas]);
     	cout<<"Masukkan stok barang\t: ";
-    	cin>>itm.stok[z];
-    	z++;
+    	cin>>itm.stok[itm.atas];
 	} else if(penuh()==0){
 		itm.atas++;
 		cout<<"\nData Barang";
 		cout<<"\nMasukkan kode barang\t: ";
-    	cin>>itm.kode_brg[z];
+    	cin>>itm.kode_brg[itm.atas];
     	cout<<"Masukkan nama barang\t: ";
-    	fflush(stdin);gets(itm.nama_brg[z]);
+    	fflush(stdin);gets(itm.nama_brg[itm.atas]);
     	cout<<"Masukkan stok barang\t: ";
-    	cin>>itm.stok[z];
-    	z++;
+    	cin>>itm.stok[itm.atas];
 	}else{
 		cout<<"\nPenyimpanan penuh !!!"<<endl;
 		getch();
 	}
-    	break;
+    break;
 	
 	case 2:
 		cout<<"\nMasukkan kode barang\t: ";
     	cin>>kode;
     	
-    	for(int j=0;j<z;j++)
+    	for(int j=0;j<=itm.atas;j++)
     	{
     		if (itm.kode_brg[j]==kode)
       		{
-        		cout<<"\nNama barang\t\t: "<<itm.nama_brg[j];
+      			cout<<"\nNama barang\t\t: "<<itm.nama_brg[j];
         		cout<<"\nStok barang saat ini\t: "<<itm.stok[j];
         		cout<<"\n\nJumlah barang yang ingin ditambahkan\t:";
         		cin>>jml_tambah;
@@ -100,12 +97,14 @@ void tambah(){
         		itm.stok[j] = total_stok + jml_tambah;
         		cout<<"\nPenambahan stok berhasil";
         		getch();
+        		break;
       		} 
 			else 
 			{
 				cout<<"Kode yang Anda masukkan salah";
 				getch();
 			}
+			
     	}
     	break;
     	
@@ -116,23 +115,6 @@ void tambah(){
 	}
 }
 
-// TAMPIL
-void tampil()
-{
-    int i, j=1;
-    system("cls");
-
-       for(i=0;i<z;i++)
-      {
-		cout<<"\nKode barang\t: "<<itm.kode_brg[i];
-    	cout<<"\nNama barang\t: "<<itm.nama_brg[i];
-    	cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
-        j++;
-       }
-        getch();
-      }
-
-// AMBIL
 void ambil(){
 	char a;
 	string i;
@@ -142,9 +124,9 @@ void ambil(){
 	system("cls");
 	
 	if(kosong()==0){
-cout<<"\nMasukkan kode barang\t: ";
+	cout<<"\nMasukkan kode barang\t: ";
     cin>>i;
-    for(j=0;j<z;j++)
+    for(j=itm.atas;j>=0;j--)
     {
     	if (itm.kode_brg[j]==i)
       	{
@@ -215,14 +197,37 @@ cout<<"\nMasukkan kode barang\t: ";
     getch();
 }
 
-// CARI
+void kosongkan(){
+	itm.atas=-1;
+	cout<<"\nPenyimpanan telah dikosongkan"<<endl;
+	getch();
+}
+
+void tampil()
+{
+	if(kosong()==0){
+		int i, j=1;
+    	system("cls");
+
+    	for(i=itm.atas;i>=0;i--)
+    	{
+			cout<<"\nKode barang\t: "<<itm.kode_brg[i];
+    		cout<<"\nNama barang\t: "<<itm.nama_brg[i];
+    		cout<<"\nStok barang\t: "<<itm.stok[i]<<endl<<endl;
+    	}
+	} else {
+		cout<<"\nPenyimpanan kosong"<<endl;
+	}
+    getch();
+}
+
 void cari(){
-    int a, i, count;
-    string cari;
+    int a, i, j,count;
+    string cari,data;
     cout<<"\nMasukkan nama barang yang dicari: ";
     fflush(stdin);getline(cin,cari);
 
-    for(i=0;i<z;i++){
+    for(i=0;i<itm.atas+1;i++){
 		if(itm.nama_brg[i] == cari){
 		 count=1;
 		 break;
@@ -240,21 +245,21 @@ void cari(){
     getch();
   }
 
-// URUTKAN
 void urut(){
-  	int i,j;
-	char temp[20];
+	if(kosong()==0){
+		int i,j;
+		char temp[20];
 		
 		tampil();
 		
 		 cout<<"Nama barang sebelum urut\t: "<<endl;
-		 for (i=0;i<z;i++){
+		 for (i=0;i<itm.atas+1;i++){
 		 	cout<<i+1<<"."<<itm.nama_brg[i]<<endl;
 		 }
 		cout<<"\nNama barang diurutkan secara Ascending"<<endl;
-		for(i=1; i<z; i++)
+		for(i=1; i<itm.atas+1; i++)
 		{
-			for(j=1; j<z; j++)
+			for(j=1; j<itm.atas+1; j++)
 			{
 				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])>0)
 				{
@@ -265,15 +270,15 @@ void urut(){
 			}
 		}
 		cout<<"No."<<"\tNama"<<endl;
-		for(i=0; i<z; i++)
+		for(i=0; i<itm.atas+1; i++)
 		{
 			cout<<i+1<<".| "<< itm.nama_brg[i] <<endl;
 		}
 		
 		cout<<"\nNama barang diurutkan secara Descending"<<endl;
-		for(i=1; i<z; i++)
+		for(i=1; i<itm.atas+1; i++)
 		{
-			for(j=1; j<z; j++)
+			for(j=1; j<itm.atas+1; j++)
 			{
 				if(strcmp(itm.nama_brg[j-1], itm.nama_brg[j])<0)
 				{
@@ -284,11 +289,14 @@ void urut(){
 			}
 		}
 		cout<<"No."<<"\tNama Barang"<<endl;
-		for(i=0; i<z; i++)
+		for(i=0; i<itm.atas+1; i++)
 		{
 			cout <<i+1<<".| "<< itm.nama_brg[i]<<endl;
 		}	
-		getch();
+	} else {
+		cout<<"\nPenyimpanan kosong"<<endl;
+	}
+  	getch();
  }
  
    
@@ -296,6 +304,7 @@ void urut(){
 int main (){
     int i;
     system("cls");
+    awal();
 
     while(1)
     {
@@ -308,7 +317,8 @@ int main (){
       cout<<"\n3: Ambil barang";
       cout<<"\n4: Cari data barang";
       cout<<"\n5: Urutkan data barang";
-      cout<<"\n6: Keluar";
+      cout<<"\n6: Kosongkan";
+      cout<<"\n7: Keluar";
       cout<<"\n---------------------------------------";
       cout<<"\n\n Pilih nomor\t: ";
       cin>>i;
@@ -343,11 +353,16 @@ int main (){
         }
 		   case 6:
         {
+          kosongkan();
+          break;
+        }
+         case 7:
+        {
       	exit(0);
           break;
         }
       }
-      if (i==6)
+      if (i==7)
         break;
       	system("cls");
     }
